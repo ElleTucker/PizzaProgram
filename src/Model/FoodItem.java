@@ -1,5 +1,6 @@
+package Model;
 public abstract class FoodItem {
-  private double price;
+  private final double price;
   
   public FoodItem(double thePrice) {
     price = thePrice;

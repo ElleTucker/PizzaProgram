@@ -1,6 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Model.FoodItem;
 
 public class Main {
   	private static Scanner scanner = new Scanner(System.in);

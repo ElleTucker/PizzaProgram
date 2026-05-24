@@ -1,3 +1,4 @@
+package Model;
 public enum Topping {
   Sausage(0.50),
   Pineapple(0.25),
