@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import Model.FoodItem;
+import Model.Pizza;
 
 public class Main {
   	private static Scanner scanner = new Scanner(System.in);
@@ -31,23 +32,12 @@ public class Main {
   
   	private static void chooseOption(String userInput) {
       switch(userInput) {
-        case "1": 
-          orderPizza();
-          break;
-        case "2":
-          orderChickenWings();
-          break;
-        case "3":
-          orderDrink();
-          break;
-        case "4":
-          reviewCurrentOrder();
-          break;
-        case "5":
-          checkout();
-          break;
-        default:
-          System.out.println("Invalid input");
+        case "1" -> orderPizza();
+        case "2" -> orderChickenWings();
+        case "3" -> orderDrink();
+        case "4" -> reviewCurrentOrder();
+        case "5" -> checkout();
+        default -> System.out.println("Invalid input");
       }
     }
 
@@ -68,6 +58,7 @@ public class Main {
       String userInput = printPizzaMenu();
       switch(userInput) {
         case "1":
+          foodItems.add(new Pizza(5));
           
       }
     }
