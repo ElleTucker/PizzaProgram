@@ -1,4 +1,5 @@
 package Model;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza extends FoodItem {
@@ -9,6 +10,7 @@ public class Pizza extends FoodItem {
   
   public Pizza(double thePrice) {
     super(thePrice);
+    toppings = new ArrayList<Topping>();
   }
 
   public Size getSize() {
@@ -38,5 +40,13 @@ public class Pizza extends FoodItem {
   }
   public void setSauceAmount(Sauce theSauce) {
     sauce = theSauce;
+  }
+  @Override
+  public String toString() {
+    String value = "Pizza\nPrice: " + getPrice() + "\nToppings: ";
+    for(int i = 0; i < toppings.size(); i++) {
+      value += toppings.get(i) + " ";
+    }
+    return  value;
   }
 }
