@@ -1,4 +1,6 @@
 package Model;
+
+
 public enum Topping {
   Sausage(0.50),
   Pineapple(0.25),
@@ -17,5 +19,17 @@ public enum Topping {
   
   public double getPrice() {
     return price;
+  }
+
+  public static void printToppingsMenu() {
+    int count = 1;
+    for (Topping topping : getToppingsArray()) {
+        System.out.println(count + ") " + topping + " (" + topping.getPrice() + ")");
+        count++;
+    }
+  }
+  public static Topping[] getToppingsArray() {
+    Topping[] toppings = {Sausage, Pineapple, Ham, Chicken, Bell_Pepper, Onion, Olive, Pepperoni, Mushroom};
+    return toppings;
   }
 }
