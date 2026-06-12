@@ -10,6 +10,7 @@ import Model.Topping;
 public class Main {
   	private static Scanner scanner = new Scanner(System.in);
     private static List<FoodItem> foodItems = new ArrayList<FoodItem>();
+    private static PizzaOrderer pizzaOrderer = new PizzaOrderer();
   
 	public static void main(String[] args) {
 		boolean keepOrdering = true;
@@ -33,7 +34,7 @@ public class Main {
   
   	private static void chooseOption(String userInput) {
       switch(userInput) {
-        case "1" -> orderPizza();
+        case "1" -> pizzaOrderer.order(scanner);
         case "2" -> orderChickenWings();
         case "3" -> orderDrink();
         case "4" -> reviewCurrentOrder();
@@ -42,103 +43,11 @@ public class Main {
       }
     }
 
-  	private static String choosePizzaMenu() {
-      System.out.println("Select a type of pizza");
-      System.out.println("1) Pepperoni");
-      System.out.println("2) Cheese");
-      System.out.println("3) Hawaiian");
-      System.out.println("4) Veggie");
-      System.out.println("5) Meat Lover");
-      System.out.println("6) Custom");
-      System.out.println("Enter a value to select: ");
-      String input = scanner.next();
-      return input;
-    }
+  
 
-    private static Pizza createPizza(String userInput) {
-      Pizza userPizza;
-      switch(userInput) {
-        case "1" -> {
-            userPizza = new Pizza(10); //pepperoni pizza
-            addMultipleToppings(userPizza, 6, Topping.Pepperoni);
-            return userPizza;
-                  }
-        case "2" -> {
-            userPizza = new Pizza(10);
-            return userPizza;
-                  }
-        case "3" -> {
-            userPizza = new Pizza(8);
-            addMultipleToppings(userPizza, 6, Topping.Pineapple);
-            addMultipleToppings(userPizza, 4, Topping.Ham);
-            return userPizza;
-                  }
-        case "4" -> {
-            userPizza = new Pizza(8);
-            addMultipleToppings(userPizza, 3, Topping.Bell_Pepper);
-            addMultipleToppings(userPizza, 6, Topping.Olive);
-            addMultipleToppings(userPizza, 4, Topping.Onion);
-            addMultipleToppings(userPizza, 6, Topping.Mushroom);
-            return userPizza;
-                  }
-        case "5" -> {
-            userPizza = new Pizza(8);
-            addMultipleToppings(userPizza, 4, Topping.Pepperoni);
-            addMultipleToppings(userPizza, 4, Topping.Sausage);
-            addMultipleToppings(userPizza, 4, Topping.Ham);
-            addMultipleToppings(userPizza, 4, Topping.Chicken);
-            return userPizza;
-                  }
-        case "6" -> {
-            userPizza = new Pizza(8);
-            addToppings(userPizza);
-            return userPizza;
-                  }
-        default -> {
-            userPizza = new Pizza(-1);
-            return userPizza;
-                  }
-      }
-    }
+    
 
-    private static void addToppings(Pizza thePizza) {
-      boolean keepAddingToppings = true;
-      while(keepAddingToppings) {
-        System.out.println("Select a topping.");
-        Topping.printToppingsMenu();
-        System.out.println("Enter a value:");
-        int input = scanner.nextInt();
-        input--;
-        if(input>=0 && input<=9) {
-          System.out.println("How many of the toppings do you want?");
-          int amount = scanner.nextInt();
-          addMultipleToppings(thePizza, amount, Topping.getToppingsArray() [input]);
-          System.out.println(amount + " amount of toppings were added!");
-          System.out.println("Do you want to add more toppings?");
-          String reply = scanner.next();
-
-          if(reply.toLowerCase().trim().equals("no")) {
-            keepAddingToppings = false;
-          }
-        }
-        else {
-          System.out.println("Invalid Choice");
-        }
-      }
-     
-    }
-
-    private static void addMultipleToppings(Pizza thePizza, int num, Topping theTopping) {
-      for (int count = 0; count < num; count++) {
-        thePizza.addTopping(theTopping);
-      }
-    }
-
-  	private static void orderPizza() {
-      String userInput = choosePizzaMenu();
-      Pizza pizza = createPizza(userInput);
-      System.out.println(pizza);
-    }
+   
     private static void orderChickenWings() {
       System.out.println("Select an amount of Chicken Wings: ");
       int amount = scanner.nextInt();
