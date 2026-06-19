@@ -1,5 +1,7 @@
 
+import Model.Amount;
 import Model.Pizza;
+import Model.Sauce;
 import Model.Size;
 import Model.Topping;
 import java.util.Scanner;
@@ -10,6 +12,7 @@ public class PizzaOrderer {
 
     public Pizza order(Scanner scanner) {
         boolean keepOrdering = true;
+        state = OrderState.MAIN_MENU;
         Pizza pizza = null;
         while(keepOrdering) {
             switch (state) {
@@ -34,8 +37,29 @@ public class PizzaOrderer {
                     selectSize(pizza, scanner);
                     state = OrderState.SAUCE;
                 }
-            
+                case OrderState.SAUCE -> {
+                    selectSauce(pizza, scanner);
+                    state = OrderState.CHEESE;
+                }
+                case OrderState.CHEESE -> {
+                    selectCheeseAmount(pizza, scanner);
+                    state = OrderState.NONE;
+                }
+                case OrderState.NONE -> {
+                    System.out.println(pizza);
+                    System.out.println("Is this correct?");
+                    String input = scanner.next();
+                    if(input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+                        return pizza;
+                    }
+                    else {
+                        state = OrderState.MAIN_MENU;
+                        pizza = null;
+                    }
+                }
                 default -> {
+                    state = OrderState.MAIN_MENU;
+                    System.out.println("Error occured.");
                 }
             }
         }
@@ -147,13 +171,51 @@ public class PizzaOrderer {
         }
     }
 
+    private void selectSauce(Pizza pizza, Scanner scanner) {
+        boolean keepSelectingSauce = true;
+        while (keepSelectingSauce) {
+            System.out.println("Select the type of sauce.");
+            Sauce.printSauceMenu();
+            System.out.println("Enter a value.");
+            int input = scanner.nextInt();
+            input--;
+            if (input>=0 && input<=5) {
+                keepSelectingSauce = false;
+                pizza.setSauce(Sauce.getSauceArray()[input]);
+            }
+            else {
+                System.out.println("Invalid Choice.");
+            }
+        }
+    }
+
+    private void selectCheeseAmount(Pizza pizza, Scanner scanner) {
+        boolean keepSelectingCheese = true;
+        while (keepSelectingCheese) {
+            System.out.println("Select the amount of cheese.");
+            Amount.printAmount();
+            System.out.println("Enter a value.");
+            int input = scanner.nextInt();
+            input--;
+            if (input>=0 && input<=2) {
+                keepSelectingCheese = false;
+                pizza.setCheeseAmount(Amount.getAmountArray()[input]);
+            }
+            else {
+                System.out.println("Invalid Choice.");
+            }
+        }
+    }
+
     private enum OrderState {
         NONE, 
         MAIN_MENU,
         SPECIALITY,
         TOPPINGS,
         SIZE,
-        SAUCE;
+        SAUCE,
+        CHEESE;
+    
     }
 
 }

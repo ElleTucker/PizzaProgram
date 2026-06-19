@@ -38,15 +38,26 @@ public class Pizza extends FoodItem {
   public Sauce getSauce() {
     return sauce;
   }
-  public void setSauceAmount(Sauce theSauce) {
+  public void setSauce(Sauce theSauce) {
     sauce = theSauce;
+  }
+  public double getTotal() {
+    double total = getPrice() + sauce.getPrice() + cheeseAmount.getPrice() + size.getPrice();
+    for(Topping topping : toppings) {
+      total += topping.getPrice();
+    }
+    return total;
   }
   @Override
   public String toString() {
-    String value = "Pizza\nPrice: " + getPrice() + "\nToppings: ";
+    String value = "Pizza\nToppings: ";
     for(int i = 0; i < toppings.size(); i++) {
       value += toppings.get(i) + " ";
     }
+    value += "\nSize: " + size;
+    value += "\nSauce: " + sauce;
+    value += "\nCheese Amount: " + cheeseAmount;
+    value += "\nTotal Price: " + getTotal();
     return  value;
   }
 }
