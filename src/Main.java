@@ -1,13 +1,12 @@
-import Model.Amount;
-import java.util.ArrayList;
+import java.util.ArrayList; //importing java libraries
 import java.util.List;
 import java.util.Scanner;
 
-import Model.FoodItem;
+import Model.FoodItem; // importing Models
 import Model.Pizza;
-import Model.Topping;
 
 public class Main {
+  // properties
   	private static Scanner scanner = new Scanner(System.in);
     private static List<FoodItem> foodItems = new ArrayList<FoodItem>();
     private static PizzaOrderer pizzaOrderer = new PizzaOrderer();
@@ -34,7 +33,12 @@ public class Main {
   
   	private static void chooseOption(String userInput) {
       switch(userInput) {
-        case "1" -> pizzaOrderer.order(scanner);
+        case "1" -> {
+          Pizza pizza = pizzaOrderer.order(scanner);
+          if(pizza != null) {
+            foodItems.add(pizza);
+          }
+        }
         case "2" -> orderChickenWings();
         case "3" -> orderDrink();
         case "4" -> reviewCurrentOrder();

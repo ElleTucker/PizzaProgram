@@ -3,14 +3,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pizza extends FoodItem {
+  // properties
   private Size size;
-  private List<Topping> toppings;
+  private final List<Topping> toppings;
   private Amount cheeseAmount;
   private Sauce sauce;
+
+  // behaviors
   
   public Pizza(double thePrice) {
     super(thePrice);
-    toppings = new ArrayList<Topping>();
+    toppings = new ArrayList<>();
   }
 
   public Size getSize() {
@@ -41,6 +44,7 @@ public class Pizza extends FoodItem {
   public void setSauce(Sauce theSauce) {
     sauce = theSauce;
   }
+  @Override
   public double getTotal() {
     double total = getPrice() + sauce.getPrice() + cheeseAmount.getPrice() + size.getPrice();
     for(Topping topping : toppings) {

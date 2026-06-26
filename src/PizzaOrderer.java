@@ -29,6 +29,9 @@ public class PizzaOrderer {
                     }
                     else {
                       pizza = createPizza(input);
+                      if(pizza == null) {
+                        return pizza; // invalid pizza chosen
+                      }
                       state = OrderState.SIZE;  
                     }
                 }
@@ -114,8 +117,8 @@ public class PizzaOrderer {
                 return userPizza;
                     }
             default -> {
-                userPizza = new Pizza(-1);
-                return userPizza;
+                 System.out.println("Invalid pizza choice. Cancelling order.");
+                return null;
                     }
         }
         }

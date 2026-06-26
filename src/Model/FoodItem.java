@@ -9,4 +9,7 @@ public abstract class FoodItem {
   public double getPrice() {
     return price;
   }
+
+  public abstract double getTotal();
+
 }
